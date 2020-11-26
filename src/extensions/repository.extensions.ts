@@ -1,4 +1,5 @@
-import { ObjectLiteral, FindConditions, Repository, DeepPartial } from 'typeorm'
+import { ObjectLiteral, FindConditions, DeepPartial } from 'typeorm'
+import { Repository } from 'typeorm/repository/Repository'
 
 export interface FindOrCreateOptions<Entity extends ObjectLiteral> {
   where: FindConditions<Entity>
