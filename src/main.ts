@@ -4,9 +4,21 @@ import { GraphQLError } from 'graphql'
 import { ValidationPipe } from '@nestjs/common'
 import { useContainer, ValidationError } from 'class-validator'
 import { AppModule } from './app.module'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+
+  const options = new DocumentBuilder()
+    .setTitle('Blacklabel API Documents')
+    .setDescription('Blacklabel API Documents')
+    .setVersion('0.1')
+    .build()
+
+  const document = SwaggerModule.createDocument(app, options)
+
+  SwaggerModule.setup('api', app, document)
+
   app.useGlobalPipes(
     new ValidationPipe({
       exceptionFactory: (errors: ValidationError[]) =>
