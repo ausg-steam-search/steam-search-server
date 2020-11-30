@@ -10,8 +10,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   const options = new DocumentBuilder()
-    .setTitle('Blacklabel API Documents')
-    .setDescription('Blacklabel API Documents')
+    .setTitle('Steam Search API Documents')
+    .setDescription('Steam Search API Documents')
     .setVersion('0.1')
     .build()
 
