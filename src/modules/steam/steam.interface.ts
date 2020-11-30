@@ -1,4 +1,12 @@
-export interface ISteamGame {}
+export interface ISteamGame {
+  name: string
+  detailed_description: string
+  about_the_game: string
+  short_description: string
+  header_image: string
+  website: string
+  background: string
+}
 
 export interface ISteamReview {
   recommendationId: number
