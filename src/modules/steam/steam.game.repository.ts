@@ -2,6 +2,7 @@ import { AbstractRepository, DeepPartial, EntityRepository, FindConditions } fro
 import { removeNullOrUndefinedFromObject } from 'src/utils/utils'
 import { IPagination } from '../crud/pagination'
 import { SteamGame } from './steam.game.entity'
+import { SteamReview } from './steam.review.entity'
 
 export interface SteamGameFindOneOptions {
   id?: number
@@ -42,6 +43,11 @@ export class SteamGameRepository extends AbstractRepository<SteamGame> {
 
   public async save(entity: DeepPartial<SteamGame>) {
     return this.repository.save(entity)
+  }
+
+  public async saveSteamReview(entity: DeepPartial<SteamReview>) {
+    const steamReviewRepository = this.manager.getRepository(SteamReview)
+    return steamReviewRepository.save(entity)
   }
 
   public async delete(criteria: number | number[] | FindConditions<SteamGame>) {

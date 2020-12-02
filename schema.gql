@@ -2,6 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type SteamGame {
+  id: Int!
+  appId: Int!
+  name: String!
+  detailDescription: String!
+  aboutTheGame: String!
+  shortDescription: String!
+  headerImage: String!
+  website: String!
+  background: String!
+}
+
 type Query {
   hello: String!
 }

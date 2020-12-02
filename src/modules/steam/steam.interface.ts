@@ -9,7 +9,7 @@ export interface ISteamGame {
 }
 
 export interface ISteamReview {
-  recommendationId: number
+  recommendationid: number
   author: ISteamAuthor
   review: string
   timestamp_created: number
