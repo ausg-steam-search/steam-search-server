@@ -25,19 +25,19 @@ export class SteamGame {
   @Field()
   aboutTheGame: string
 
-  @Column()
+  @Column('text')
   @Field()
   shortDescription: string
 
-  @Column()
+  @Column({ default: '' })
   @Field()
   headerImage: string
 
-  @Column()
+  @Column({ default: '' })
   @Field()
   website: string
 
-  @Column()
+  @Column({ default: '' })
   @Field()
   background: string
 

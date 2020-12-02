@@ -2,19 +2,23 @@ import { Injectable } from '@nestjs/common'
 import { Cron } from '@nestjs/schedule'
 import { steamReviewAxios } from 'src/utils/utils.axios'
 import { SteamGame } from './steam.game.entity'
+import { SteamGameRepository } from './steam.game.repository'
 import { ISteamGame, ISteamReview } from './steam.interface'
+import { delay } from 'src/utils/utils'
 
 @Injectable()
 export class SteamApiService {
-  constructor() {}
+  constructor(private readonly steamGameRepository: SteamGameRepository) {}
 
   // @Cron('*/3 * * * * *')
   public async scheduleGame() {
-    for (let appId = 10; appId < 1000000; appId+=10) {
-      try{
-        const { data } = await steamReviewAxios.get(`/api/appdetails?appids=${appId}&language=korean`)
+    for (let appId = 1720; appId < 1000000; appId += 10) {
+      try {
+        const { data } = await steamReviewAxios.get(
+          `/api/appdetails?appids=${appId}&language=korean`,
+        )
         const game = data[appId.toString()].data as ISteamGame
-  
+
         if (game) {
           const {
             about_the_game,
@@ -25,25 +29,23 @@ export class SteamApiService {
             short_description,
             website,
           } = game
-  
+
           const steamGame = SteamGame.buildWith({
             appId,
-            aboutTheGame: about_the_game,
-            background,
-            detailDescription: detailed_description,
+            aboutTheGame: about_the_game ?? '',
+            background: background ?? '',
+            detailDescription: detailed_description ?? '',
             headerImage: header_image,
             name,
-            shortDescription: short_description,
-            website,
+            shortDescription: short_description ?? '',
+            website: website ?? '',
           })
-          console.log(steamGame)
+          await this.steamGameRepository.save(steamGame)
         }
-      }catch(e){
+      } catch (e) {
         console.error(e.message)
-        console.error(e.status)
-        console.error(e.statusCode)
+        await delay(300)
       }
-      
     }
   }
 
