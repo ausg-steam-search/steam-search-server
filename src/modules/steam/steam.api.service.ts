@@ -14,22 +14,22 @@ export class SteamApiService {
   /**
    * 주기적으로 게임 리뷰를 받아와 DB 적재
    */
-  // @Cron('0 * * * * *')
-  // private async scheduleFetchReviews_0() {
-  //   await this.fetchReviews({ skip: 0, take: 200 })
-  // }
-  // @Cron('15 * * * * *')
-  // private async scheduleFetchReviews_1() {
-  //   await this.fetchReviews({ skip: 200, take: 200 })
-  // }
-  // @Cron('30 * * * * *')
-  // private async scheduleFetchReviews_2() {
-  //   await this.fetchReviews({ skip: 400, take: 200 })
-  // }
-  // @Cron('45 * * * * *')
-  // private async scheduleFetchReviews_3() {
-  //   await this.fetchReviews({ skip: 600, take: 200 })
-  // }
+  @Cron('0 * * * * *')
+  private async scheduleFetchReviews_0() {
+    await this.fetchReviews({ skip: 0, take: 200 })
+  }
+  @Cron('15 * * * * *')
+  private async scheduleFetchReviews_1() {
+    await this.fetchReviews({ skip: 200, take: 200 })
+  }
+  @Cron('30 * * * * *')
+  private async scheduleFetchReviews_2() {
+    await this.fetchReviews({ skip: 400, take: 200 })
+  }
+  @Cron('45 * * * * *')
+  private async scheduleFetchReviews_3() {
+    await this.fetchReviews({ skip: 600, take: 200 })
+  }
 
   private async fetchReviews({ skip, take }: { skip: number; take: number }) {
     const { items: games } = await this.steamGameRepository.findAll({ skip, take })
@@ -60,7 +60,7 @@ export class SteamApiService {
 
               await this.steamGameRepository.saveSteamReview(steamReview)
             } catch (e) {
-              console.error(e)
+              // console.error(e)
             }
           }),
         )
@@ -68,7 +68,7 @@ export class SteamApiService {
     )
   }
 
-  @Cron('30 52 19 * * *')
+  // @Cron('30 52 19 * * *')
   private async scheduleGame() {
     console.log('SCHE')
     for (let appId = 578080; appId < 945361; appId += 10) {
