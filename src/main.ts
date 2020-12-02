@@ -4,9 +4,21 @@ import { GraphQLError } from 'graphql'
 import { ValidationPipe } from '@nestjs/common'
 import { useContainer, ValidationError } from 'class-validator'
 import { AppModule } from './app.module'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+
+  const options = new DocumentBuilder()
+    .setTitle('Steam Search API Documents')
+    .setDescription('Steam Search API Documents')
+    .setVersion('0.1')
+    .build()
+
+  const document = SwaggerModule.createDocument(app, options)
+
+  SwaggerModule.setup('api', app, document)
+
   app.useGlobalPipes(
     new ValidationPipe({
       exceptionFactory: (errors: ValidationError[]) =>
@@ -18,6 +30,6 @@ async function bootstrap() {
 
   app.enableCors()
 
-  await app.listen(3000)
+  await app.listen(3005)
 }
 bootstrap()

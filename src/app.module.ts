@@ -10,6 +10,7 @@ import './extensions/array.extensions'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { SearchModule } from './modules/search/search.module'
+import { SteamModule } from './modules/steam/steam.module'
 
 const bDev = process.env.NODE_ENV === 'development'
 
@@ -24,6 +25,7 @@ const bDev = process.env.NODE_ENV === 'development'
     }),
     ScheduleModule.forRoot(),
     SearchModule,
+    SteamModule,
   ],
   controllers: [AppController],
   providers: [
