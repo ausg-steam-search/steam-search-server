@@ -2,9 +2,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { ObjectType, Field, Int } from '@nestjs/graphql'
 import { buildWithPartialData } from 'src/utils/utils'
 
-@Entity({ name: 'TestTel' })
+@Entity({ name: 'SteamGame' })
 @ObjectType()
-export class TestTel {
+export class SteamGame {
   @PrimaryGeneratedColumn()
   @Field((type) => Int)
   id: number
@@ -41,7 +41,7 @@ export class TestTel {
   @Field()
   background: string
 
-  public static buildWith(partialData: Partial<TestTel>) {
-    return buildWithPartialData(TestTel, partialData)
+  public static buildWith(partialData: Partial<SteamGame>) {
+    return buildWithPartialData(SteamGame, partialData)
   }
 }
