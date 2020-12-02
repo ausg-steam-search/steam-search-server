@@ -7,8 +7,8 @@ import { ISteamGame, ISteamReview } from './steam.interface'
 export class SteamApiService {
   constructor() {}
 
-  @Cron('*/3 * * * * *')
-  private async scheduleGame() {
+  // @Cron('*/3 * * * * *')
+  public async scheduleGame() {
     const APP_ID = 945360
     const { data } = await steamReviewAxios.get(`/api/appdetails?appids=${APP_ID}&language=korean`)
 
