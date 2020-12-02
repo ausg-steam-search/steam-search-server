@@ -12,7 +12,7 @@ export class SteamApiService {
 
   // @Cron('*/3 * * * * *')
   public async scheduleGame() {
-    for (let appId = 1720; appId < 1000000; appId += 10) {
+    for (let appId = 945360; appId < 945361; appId += 10) {
       try {
         const { data } = await steamReviewAxios.get(
           `/api/appdetails?appids=${appId}&language=korean`,
@@ -44,7 +44,7 @@ export class SteamApiService {
         }
       } catch (e) {
         console.error(e.message)
-        await delay(300)
+        await delay(200)
       }
     }
   }
